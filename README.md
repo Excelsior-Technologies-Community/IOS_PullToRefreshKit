@@ -1,15 +1,6 @@
-
 # PullToRefreshKit
 
-A lightweight, **SwiftUI-only Pull-to-Refresh control** for **iOS 14+** that supports:
-
-* Pull gesture refresh
-* Centered loading indicator
-* Programmatic start & stop
-* Custom threshold and colors
-* No UIKit views
-* No `.refreshable`
-* Dependency-friendly design
+A lightweight, **SwiftUI-only Pull-to-Refresh control** for **iOS 14+**, designed with a **controller-based API** for clean and professional usage.
 
 ---
 
@@ -17,10 +8,12 @@ A lightweight, **SwiftUI-only Pull-to-Refresh control** for **iOS 14+** that sup
 
 * ✅ Pure SwiftUI (no UIKit views)
 * ✅ Works with `ScrollView`, `LazyVStack`, `LazyVGrid`
-* ✅ Programmatic refresh start & stop
+* ✅ **Controller-based API** (`startLoading()` / `stopLoading()`)
+* ✅ Programmatic refresh support
+* ✅ Centered loading indicator
 * ✅ Customizable threshold and colors
 * ✅ Haptic feedback on trigger
-* ✅ Minimal & production-ready
+* ✅ Production-ready & dependency-safe
 
 ---
 
@@ -33,7 +26,7 @@ A lightweight, **SwiftUI-only Pull-to-Refresh control** for **iOS 14+** that sup
 3. Paste the repository URL:
 
 ```
-https://github.com/Excelsior-Technologies-Community/IOS_PullToRefreshKit
+https://github.com/Excelsior-Technologies-Community/PullToRefreshKit
 ```
 
 4. Select the latest version
@@ -43,17 +36,15 @@ https://github.com/Excelsior-Technologies-Community/IOS_PullToRefreshKit
 
 ## 📥 Import
 
-In any SwiftUI file where you want to use Pull-to-Refresh:
-
 ```swift
 import PullToRefreshKit
 ```
 
 ---
 
-## ⚠️ Important Requirement
+## ⚠️ Required Setup
 
-Your `ScrollView` **MUST** have this coordinate space:
+Your `ScrollView` **MUST** define this coordinate space:
 
 ```swift
 .coordinateSpace(name: "pullToRefresh")
@@ -65,34 +56,45 @@ Without this, the refresh control will not work.
 
 ## 🚀 Basic Usage
 
+### 1️⃣ Create the controller
+
 ```swift
-PullToRefresh(isRefreshing: $isRefreshing) {
+@StateObject private var refresher = PullToRefreshController()
+```
+
+---
+
+### 2️⃣ Add `PullToRefresh`
+
+```swift
+PullToRefresh(controller: refresher) {
     loadData()
 }
 ```
 
 ---
 
-## 🔁 Programmatic Refresh
+## 🔁 Programmatic Control (Main Feature)
 
-### Start refresh manually
+### ▶ Start loading
 
 ```swift
-isRefreshing = true
+refresher.startLoading()
 loadData()
 ```
 
-### Stop refresh
+### ⏹ Stop loading
 
 ```swift
-isRefreshing = false
+refresher.stopLoading()
 ```
 
 This allows:
 
-* Auto refresh on appear
+* Auto refresh on screen appear
 * Retry button refresh
-* Background refresh logic
+* Background refresh
+* Manual trigger without user pull
 
 ---
 
@@ -100,7 +102,7 @@ This allows:
 
 ```swift
 PullToRefresh(
-    isRefreshing: $isRefreshing,
+    controller: refresher,
     threshold: 70,
     loaderColor: .indigo,
     arrowColor: .indigo
@@ -125,14 +127,14 @@ import PullToRefreshKit
 
 struct ContentView: View {
 
+    @StateObject private var refresher = PullToRefreshController()
     @State private var items = ["Apple", "Banana", "Cherry"]
-    @State private var isRefreshing = false
 
     var body: some View {
         ScrollView {
             VStack(spacing: 12) {
 
-                PullToRefresh(isRefreshing: $isRefreshing) {
+                PullToRefresh(controller: refresher) {
                     refresh()
                 }
 
@@ -152,7 +154,7 @@ struct ContentView: View {
     private func refresh() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             items.shuffle()
-            isRefreshing = false
+            refresher.stopLoading()
         }
     }
 }
@@ -162,24 +164,27 @@ struct ContentView: View {
 
 ## 🧠 Design Philosophy
 
-* **Library handles behavior**
+* **Controller manages behavior**
 * **App controls UI**
-* Minimal API surface
-* No magic, no hidden state
+* No external state bindings
+* Clean, UIKit-like API
+* Easy to scale and maintain
 
 ---
 
 ## 📱 Platform Support
 
-* iOS 15+
+* iOS 14+
 * SwiftUI only
+
  
 ## ⭐️ Final Notes
 
 This library is ideal when:
 
-* You need **more control than `.refreshable`**
-* You support **iOS 15**
-* You want a **custom refresh UI**
-* You need **programmatic refresh control**
+* You want **more control than `.refreshable`**
+* You support **iOS 14+**
+* You need **manual + programmatic refresh**
+* You prefer **controller-based APIs**
+ 
  
