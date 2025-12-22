@@ -33,7 +33,7 @@ A lightweight, **SwiftUI-only Pull-to-Refresh control** for **iOS 14+** that sup
 3. Paste the repository URL:
 
 ```
-https://github.com/Excelsior-Technologies-Community/PullToRefreshKit
+https://github.com/Excelsior-Technologies-Community/IOS_PullToRefreshKit
 ```
 
 4. Select the latest version
