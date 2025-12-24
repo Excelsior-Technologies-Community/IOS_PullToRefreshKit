@@ -4,7 +4,7 @@ A lightweight, **SwiftUI-only Pull-to-Refresh control** for **iOS 14+**, designe
 
 ---
 
-## ✨ Features
+##  Features
 
 * ✅ Pure SwiftUI (no UIKit views)
 * ✅ Works with `ScrollView`, `LazyVStack`, `LazyVGrid`
@@ -17,7 +17,7 @@ A lightweight, **SwiftUI-only Pull-to-Refresh control** for **iOS 14+**, designe
 
 ---
 
-## 📦 Installation (Swift Package Manager)
+##   Installation (Swift Package Manager)
 
 ### Add via Xcode
 
@@ -34,7 +34,7 @@ https://github.com/Excelsior-Technologies-Community/PullToRefreshKit
 
 ---
 
-## 📥 Import
+##   Import
 
 ```swift
 import PullToRefreshKit
@@ -42,7 +42,7 @@ import PullToRefreshKit
 
 ---
 
-## ⚠️ Required Setup
+##  Required Setup
 
 Your `ScrollView` **MUST** define this coordinate space:
 
@@ -54,9 +54,9 @@ Without this, the refresh control will not work.
 
 ---
 
-## 🚀 Basic Usage
+##   Basic Usage
 
-### 1️⃣ Create the controller
+###   Create the controller
 
 ```swift
 @StateObject private var refresher = PullToRefreshController()
@@ -64,7 +64,7 @@ Without this, the refresh control will not work.
 
 ---
 
-### 2️⃣ Add `PullToRefresh`
+###   Add `PullToRefresh`
 
 ```swift
 PullToRefresh(controller: refresher) {
@@ -74,7 +74,7 @@ PullToRefresh(controller: refresher) {
 
 ---
 
-## 🔁 Programmatic Control (Main Feature)
+##   Programmatic Control (Main Feature)
 
 ### ▶ Start loading
 
@@ -83,7 +83,7 @@ refresher.startLoading()
 loadData()
 ```
 
-### ⏹ Stop loading
+###   Stop loading
 
 ```swift
 refresher.stopLoading()
@@ -98,7 +98,7 @@ This allows:
 
 ---
 
-## 🎨 Customization
+##   Customization
 
 ```swift
 PullToRefresh(
@@ -119,7 +119,7 @@ PullToRefresh(
 
 ---
 
-## 🧪 Full Working Example
+##   Full Working Example
 
 ```swift
 import SwiftUI
@@ -162,7 +162,7 @@ struct ContentView: View {
 
 ---
 
-## 🧠 Design Philosophy
+##   Design Philosophy
 
 * **Controller manages behavior**
 * **App controls UI**
@@ -172,13 +172,13 @@ struct ContentView: View {
 
 ---
 
-## 📱 Platform Support
+##   Platform Support
 
-* iOS 14+
+* iOS 15+
 * SwiftUI only
 
  
-## ⭐️ Final Notes
+##   Final Notes
 
 This library is ideal when:
 
